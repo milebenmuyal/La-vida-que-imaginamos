@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Webtoon Animado</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- CONTENEDOR PRINCIPAL DEL COMIC -->
+  <main class="webtoon-container">
+
+    <!-- Vineta 1: Estatica -->
+    <section class="panel">
+      <img src="img/La-vida-que-imaginamos-1__01.jpg" alt="Escena inicial 2" loading="eager">
+    </section>
+
+      <!-- Vineta 2: Estatica -->
+    <section class="panel">
+      <img src="img/La-vida-que-imaginamos-1__02.jpg" alt="Escena inicial 2" loading="eager">
+    </section>
+
+      <!-- Vineta 3: Estatica -->
+    <section class="panel">
+      <img src="img/La-vida-que-imaginamos-1__03.jpg" alt="Escena inicial 2" loading="eager">
+    </section>
+
+      <!-- Vineta 4: Estatica -->
+    <section class="panel">
+      <img src="img/La-vida-que-imaginamos-1__04.jpg" alt="Escena inicial 2" loading="eager">
+    </section>
+
+<!-- Vineta 5: GIF Animado -->
+    <section class="panel">
+      <img src="img/La-vida-que-imaginamos-1__05.gif" alt="Onomatopeya de impacto" loading="lazy">
+    </section>
+
+       <!-- Vineta 6: Estatica -->
+    <section class="panel">
+      <img src="img/La-vida-que-imaginamos-2__06.jpg" alt="Escena inicial 2" loading="eager">
+    </section>
+
+      <!-- Vineta 7: Estatica -->
+    <section class="panel">
+      <img src="img/La-vida-que-imaginamos-2__07.jpg" alt="Escena inicial 2" loading="eager">
+    </section>
+
+    <!-- Vineta 8: GIF Animado -->
+    <section class="panel">
+      <img src="img/La-vida-que-imaginamos-2__08.gif" alt="Onomatopeya de impacto" loading="lazy">
+    </section>
+
+          <!-- Vineta 9: Estatica -->
+    <section class="panel">
+      <img src="img/La-vida-que-imaginamos-2__09.jpg" alt="Escena inicial 2" loading="eager">
+    </section>
+
+      <!-- Vineta 10: Estatica -->
+    <section class="panel">
+      <img src="img/La-vida-que-imaginamos-2__10.jpg" alt="Escena inicial 2" loading="eager">
+    </section>
+
+      <!-- Vineta 11: Estatica -->
+    <section class="panel">
+      <img src="img/La-vida-que-imaginamos-3__11.jpg" alt="Escena inicial 2" loading="eager">
+    </section>
+
+       <!-- Vineta 12: GIF Animado -->
+    <section class="panel">
+      <img src="img/La-vida-que-imaginamos-3__12.gif" alt="Onomatopeya de impacto" loading="lazy">
+    </section>
+
+    <!-- Vineta 13: Estatica -->
+    <section class="panel">
+      <img src="img/La-vida-que-imaginamos-3__13.jpg" alt="Escena inicial 2" loading="eager">
+    </section>
+
+      <!-- Vineta 14: Estatica -->
+    <section class="panel">
+      <img src="img/La-vida-que-imaginamos-3__14.jpg" alt="Escena inicial 2" loading="eager">
+    </section>
+
+      <!-- Vineta 15: Estatica -->
+    <section class="panel">
+      <img src="img/La-vida-que-imaginamos-3__15.jpg" alt="Escena inicial 2" loading="eager">
+    </section>
+
+      <!-- Vineta 16: Estatica -->
+    <section class="panel">
+      <img src="img/La-vida-que-imaginamos-4__16.jpg" alt="Escena inicial 2" loading="eager">
+    </section>
+
+
+  </main>
+
+  <!-- SCRIPTS DEL PROYECTO -->
+  <script>
+    /* 1. SCRIPT DE MUSICA DE FONDO */
+    const music = document.getElementById('bgMusic');
+    const btn = document.getElementById('musicBtn');
+
+    const imgPlay = 'img/nombre_del_archivo_del_boton_de_musica.jpg';
+    const imgPause = 'img/nombre_del_archivo_del_boton_de_musica.jpg'; 
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.play().then(() => {
+          btn.src = imgPause;
+          btn.classList.add('playing');
+        }).catch(error => {
+          console.log("Error al reproducir audio:", error);
+        });
+      } else {
+        music.pause();
+        btn.src = imgPlay;
+        btn.classList.remove('playing');
+      }
+    }
+
+    /* 2. SCRIPT AUTO-REPRODUCCION DE VIDEO AL HACER SCROLL */
+    const video = document.getElementById('webtoonVideo');
+
+    // Configuracion del detector de visibilidad
+    const observerOptions = {
+      root: null,
+      threshold: 0.5 // Se activa cuando al menos el 50% del video entra en pantalla
+    };
+
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // El video es visible: reproducir
+          video.play().catch(err => console.log("Autoplay bloqueado:", err));
+        } else {
+          // El video salió de la pantalla: pausar para ahorrar recursos
+          video.pause();
+        }
+      });
+    }, observerOptions);
+
+    if (video) {
+      videoObserver.observe(video);
+    }
+  </script>
+
+</body>
+</html>
